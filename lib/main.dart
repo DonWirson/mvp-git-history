@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:git_history/views/main/main_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'screens/landing/landing_page.dart';
 
-void main() {
+import 'blocs/github_bloc/github_bloc.dart';
+import 'core/observer/app_bloc_observer.dart';
+import 'screens/branches/branches_page.dart';
+
+Future<void> main() async {
+  Bloc.observer = AppBlocObserver();
+  await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }
 
@@ -16,7 +24,10 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MainPage(),
+      home: BlocProvider(
+        create: (context) => GithubBloc(),
+        child: const LandingPage(),
+      ),
     );
   }
 }
