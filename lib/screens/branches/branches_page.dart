@@ -4,16 +4,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/github_bloc/github_bloc.dart';
 import '../../core/loading_indicator.dart';
 import '../../models/branch_model.dart';
-import '../commits/commit_page.dart';
 
-class MainPage extends StatefulWidget {
-  const MainPage({super.key});
+class BranchesPage extends StatefulWidget {
+  const BranchesPage({super.key});
 
   @override
-  State<MainPage> createState() => _MainPageState();
+  State<BranchesPage> createState() => _BranchesPageState();
 }
 
-class _MainPageState extends State<MainPage> {
+class _BranchesPageState extends State<BranchesPage> {
   List<BranchModel> branches = [];
   @override
   void initState() {
@@ -29,18 +28,18 @@ class _MainPageState extends State<MainPage> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(state.exception),
-              duration: const Duration(seconds: 6),
+              duration: const Duration(seconds: 4),
             ),
           );
         }
-        if (state is GotAllBranchesSuccessfull) {
+        if (state is GotAllBranchesSuccessfully) {
           branches = state.branches;
         }
       },
       builder: (context, state) {
         return BlocBuilder<GithubBloc, GithubState>(
           builder: (context, state) {
-            if (state is GotAllBranchesSuccessfull) {
+            if (state is GotAllBranchesSuccessfully) {
               return Scaffold(
                 appBar: AppBar(
                   title: const Text("Select a branch to show commits"),
@@ -52,16 +51,8 @@ class _MainPageState extends State<MainPage> {
                     return ListTile(
                       title: Text("Branch: ${branch.name}"),
                       trailing: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>  const CommitPage(
-                                branchSha: "asd",
-                              ),
-                            ),
-                          );
-                        },
+                        onTap: () =>
+                            navigateToCommitPage(branchSha: branch.commit.sha),
                         child: const Icon(Icons.arrow_forward_ios_sharp),
                       ),
                     );
@@ -72,10 +63,40 @@ class _MainPageState extends State<MainPage> {
                 ),
               );
             }
+            if (state is GotAllBranchesFailure) {
+              Center(
+                child: ElevatedButton(
+                  child: const Text("Search branches again :C"),
+                  onPressed: () => BlocProvider.of<GithubBloc>(context)
+                      .add(GotAllBranches()),
+                ),
+              );
+            }
+
             return const LoadingIndicator();
           },
         );
       },
     );
+  }
+  //TODO: fix logic in CommitsByBranch screen.
+  void navigateToCommitPage({required String branchSha}) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("TODO feature"),
+        duration: Duration(seconds: 2),
+      ),
+    );
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder: (_) => BlocProvider.value(
+    //       value: BlocProvider.of<GithubBloc>(context),
+    //       child: CommitsByBranch(
+    //         branchSha: branchSha,
+    //       ),
+    //     ),
+    //   ),
+    // );
   }
 }
