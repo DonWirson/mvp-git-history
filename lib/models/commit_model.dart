@@ -1,19 +1,20 @@
 import 'dart:convert';
 
-class String {
-  final String? sha;
-  final String? url;
+class CommitModel {
+  final String sha;
+  final String url;
 
-  String({
-    this.sha,
-    this.url,
+  CommitModel({
+    required this.sha,
+    required this.url,
   });
 
-  factory String.fromJson(String str) => String.fromMap(json.decode(str));
+  factory CommitModel.fromJson(String str) =>
+      CommitModel.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory String.fromMap(Map<String, dynamic> json) => String(
+  factory CommitModel.fromMap(Map<String, dynamic> json) => CommitModel(
         sha: json["sha"],
         url: json["url"],
       );

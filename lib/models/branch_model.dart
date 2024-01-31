@@ -3,14 +3,14 @@ import 'dart:convert';
 import 'commit_model.dart';
 
 class BranchModel {
-  final String? name;
-  final String? commit;
-  final bool? protected;
+  final String name;
+  final CommitModel commit;
+  final bool protected;
 
   BranchModel({
-    this.name,
-    this.commit,
-    this.protected,
+    required this.name,
+    required this.commit,
+    required this.protected,
   });
 
   factory BranchModel.fromJson(String str) =>
@@ -20,13 +20,13 @@ class BranchModel {
 
   factory BranchModel.fromMap(Map<String, dynamic> json) => BranchModel(
         name: json["name"],
-        commit: json["commit"] == null ? null : String.fromMap(json["commit"]),
+        commit: CommitModel.fromMap(json["commit"]),
         protected: json["protected"],
       );
 
   Map<String, dynamic> toMap() => {
         "name": name,
-        "commit": commit?.toMap(),
+        "commit": commit.toMap(),
         "protected": protected,
       };
 }
