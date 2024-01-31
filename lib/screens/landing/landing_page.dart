@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:git_history/screens/branches/branches_page.dart';
-import 'package:git_history/screens/commits/all_commits.dart';
+import '../branches/branches_page.dart';
+import '../commits/all_commits.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});

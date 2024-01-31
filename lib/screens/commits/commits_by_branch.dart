@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:git_history/blocs/github_bloc/github_bloc.dart';
+
+import '../../blocs/github_bloc/github_bloc.dart';
 
 class CommitsByBranch extends StatefulWidget {
   const CommitsByBranch({required this.branchSha, super.key});

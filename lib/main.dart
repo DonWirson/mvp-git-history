@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'screens/landing/landing_page.dart';
 
 import 'blocs/github_bloc/github_bloc.dart';
 import 'core/observer/app_bloc_observer.dart';
-import 'views/main/main_page.dart';
+import 'screens/branches/branches_page.dart';
 
 Future<void> main() async {
   Bloc.observer = AppBlocObserver();
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
       ),
       home: BlocProvider(
         create: (context) => GithubBloc(),
-        child: const MainPage(),
+        child: const LandingPage(),
       ),
     );
   }

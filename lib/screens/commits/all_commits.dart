@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:git_history/blocs/github_bloc/github_bloc.dart';
-import 'package:git_history/models/commit_history_model.dart';
+import '../../blocs/github_bloc/github_bloc.dart';
+import '../../models/commit_history_model.dart';
 
 class AllCommits extends StatefulWidget {
   const AllCommits({super.key});

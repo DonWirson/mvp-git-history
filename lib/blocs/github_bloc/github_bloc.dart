@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:git_history/models/commit_history_model.dart';
+import '../../models/commit_history_model.dart';
 
 import '../../models/branch_model.dart';
 import '../../services/github_service.dart';
