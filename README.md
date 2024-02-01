@@ -1,4 +1,5 @@
-#   APP MVP-GIHISTORY! 👨🏽‍💻
+#   APP MVP-GIT-HISTORY! 👨🏽‍💻
+
 ## App features:
 -   Show all commits from a repository
 -   Show all commits from a repository branch (TODO)
