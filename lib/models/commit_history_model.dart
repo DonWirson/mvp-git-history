@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:equatable/equatable.dart';
-
 class CommitHistory {
   final String sha;
   final String nodeId;
@@ -189,8 +187,6 @@ class Commit {
         "verification": verification.toMap(),
       };
 
-  @override
-  operator ==(o) => o is Commit && o.tree.sha == tree.sha;
 }
 
 class CommitAuthor {

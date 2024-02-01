@@ -39,12 +39,20 @@ class _BranchesPageState extends State<BranchesPage> {
       builder: (context, state) {
         return BlocBuilder<GithubBloc, GithubState>(
           builder: (context, state) {
-            if (state is GotAllBranchesSuccessfully) {
-              return Scaffold(
-                appBar: AppBar(
-                  title: const Text("Select a branch to show commits"),
+            if (state is GotAllBranchesInProgress) {
+              return const LoadingIndicator();
+            }
+            if (state is GotAllBranchesFailure) {
+              Center(
+                child: ElevatedButton(
+                  child: const Text("Search branches again :C"),
+                  onPressed: () => BlocProvider.of<GithubBloc>(context)
+                      .add(GotAllBranches()),
                 ),
-                body: ListView.separated(
+              );
+            }
+
+            return  ListView.separated(
                   itemCount: branches.length,
                   itemBuilder: (context, index) {
                     final branch = branches[index];
@@ -60,20 +68,7 @@ class _BranchesPageState extends State<BranchesPage> {
                   separatorBuilder: (context, index) {
                     return const Divider();
                   },
-                ),
-              );
-            }
-            if (state is GotAllBranchesFailure) {
-              Center(
-                child: ElevatedButton(
-                  child: const Text("Search branches again :C"),
-                  onPressed: () => BlocProvider.of<GithubBloc>(context)
-                      .add(GotAllBranches()),
-                ),
-              );
-            }
-
-            return const LoadingIndicator();
+                );
           },
         );
       },
