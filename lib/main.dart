@@ -7,7 +7,6 @@ import 'screens/landing/landing_page.dart';
 
 import 'blocs/github_bloc/github_bloc.dart';
 import 'core/observer/app_bloc_observer.dart';
-import 'screens/branches/branches_page.dart';
 
 Future<void> main() async {
   Bloc.observer = AppBlocObserver();
@@ -26,7 +25,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        scaffoldBackgroundColor: Color.fromARGB(255, 241, 239, 239),
+        scaffoldBackgroundColor: const Color.fromARGB(255, 241, 239, 239),
         useMaterial3: true,
       ),
       home: BlocProvider(

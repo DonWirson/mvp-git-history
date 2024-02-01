@@ -1,36 +1,35 @@
-import 'dart:collection';
 import 'dart:convert';
-import 'dart:html';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import '../core/node.dart';
-import '../models/commit_history_model.dart';
+import 'package:http/http.dart';
+
 import '../models/branch_model.dart';
+import '../models/commit_history_model.dart';
 
 final class GithubService {
-  // var client = http.Client();
-  final baseUrl = dotenv.env['API_URL'];
-  final repoOwner = dotenv.env['REPO_OWNER'];
-  final repoName = dotenv.env['REPO_NAME'];
+  //In case it doesnt work, add token
 
-  ///Checks if the Github api is running
-  dynamic getApiStatus() {
-    final url = "$baseUrl";
-
-    // http.get(
-    //   Uri.parse(url),
-    // );
-  }
-
+  ///Retrieves a list of branches in a repo
   Future<List<BranchModel>> getBranchtList() async {
-    final url = "$baseUrl/repos/$repoOwner/$repoName/branches";
-
+    final url = dotenv.env['BRANCH_ENDPOINT']!;
     final response = await get(Uri.parse(url));
     final Iterable decodedResponse = jsonDecode(response.body);
+    //TODO: Add exception handler method ---> https://docs.github.com/es/rest/commits/commits?apiVersion=2022-11-28#list-commits--status-codes
     return decodedResponse
         .map((branch) => BranchModel.fromMap(branch))
         .toList();
   }
 
-  dynamic getCommitList() {}
+  ///Retrieves a list of commits in a branch
+  Future<List<CommitHistory>> getCommitsByBranch(String branchName) async {
+    final url = '${dotenv.env["COMMIT_ENDPOINT"]!}?sha=$branchName';
+    final response = await get(Uri.parse(url));
+    final Iterable decodedResponse = jsonDecode(response.body);
+    //TODO: Add exception handler method ---> https://docs.github.com/es/rest/commits/commits?apiVersion=2022-11-28#list-commits--status-codes
+    return decodedResponse
+        .map(
+          (branch) => CommitHistory.fromMap(branch),
+        )
+        .toList();
+  }
 }
