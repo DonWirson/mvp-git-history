@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 import '../../blocs/github_bloc/github_bloc.dart';
 import '../../core/loading_indicator.dart';
@@ -22,7 +23,7 @@ class _AllCommitsState extends State<AllCommits> {
 
   @override
   Widget build(BuildContext context) {
-    var padding = EdgeInsets.only(top: 8);
+    var padding = const EdgeInsets.only(top: 8);
     return BlocConsumer<GithubBloc, GithubState>(
       listener: (context, state) {
         if (state is GotAllCommitsSuccessfully) {
@@ -37,7 +38,12 @@ class _AllCommitsState extends State<AllCommits> {
               itemCount: commitList.length,
               itemBuilder: (context, index) {
                 final commit = commitList[index];
-                final date = commit.committer.date.toString().split(" ");
+                final date = DateFormat("dd-MM-yyyy")
+                    .format(commit.committer.date)
+                    .toString();
+                final hour = DateFormat("HH:mm")
+                    .format(commit.committer.date)
+                    .toString();
                 return ListTile(
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(15.0))),
@@ -75,14 +81,13 @@ class _AllCommitsState extends State<AllCommits> {
                       Padding(
                         padding: padding,
                         child: Text(
-                          date[0].toString(),
+                          date,
                           style: Theme.of(context).textTheme.labelMedium,
                         ),
                       ),
                       Padding(
                         padding: padding,
-                        //TODO: Refactor this
-                        child: Text(date[1].substring(0, 5)),
+                        child: Text(hour),
                       )
                     ],
                   ),
