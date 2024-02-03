@@ -48,35 +48,32 @@ class _AllCommitsState extends State<AllCommits> {
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(15.0))),
                   tileColor: Colors.white,
-                  leading: Padding(
-                    padding: padding,
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: padding,
-                          child: Text(
-                            "Commiter:",
-                            style: Theme.of(context).textTheme.labelLarge,
-                          ),
+                  leading: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+
+                    children: [
+                      Padding(
+                        padding: padding,
+                        child: Text(
+                          "Commiter:",
+                          style: Theme.of(context).textTheme.labelLarge,
                         ),
-                        Text(
-                          commit.author.name,
-                          style: Theme.of(context).textTheme.labelMedium,
-                        ),
-                      ],
-                    ),
+                      ),
+                      Text(
+                        commit.author.name,
+                        style: Theme.of(context).textTheme.labelMedium,
+                      ),
+                    ],
                   ),
-                  title: Padding(
-                    padding: padding,
-                    child: Text(
-                      commit.message,
-                      style: Theme.of(context).textTheme.bodySmall,
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center,
-                    ),
+                  title: Text(
+                    commit.message,
+                    style: Theme.of(context).textTheme.bodySmall,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
                   ),
                   trailing: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
                         padding: padding,
@@ -87,7 +84,9 @@ class _AllCommitsState extends State<AllCommits> {
                       ),
                       Padding(
                         padding: padding,
-                        child: Text(hour),
+                        child: Text(
+                          hour,
+                        ),
                       )
                     ],
                   ),
