@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
@@ -44,51 +45,53 @@ class _AllCommitsState extends State<AllCommits> {
                 final hour = DateFormat("HH:mm")
                     .format(commit.committer.date)
                     .toString();
-                return ListTile(
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                  tileColor: Colors.white,
-                  leading: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-
-                    children: [
-                      Padding(
-                        padding: padding,
-                        child: Text(
-                          "Commiter:",
-                          style: Theme.of(context).textTheme.labelLarge,
+                return Padding(
+                  padding: const EdgeInsets.only(top: 15.0),
+                  child: ListTile(
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                    tileColor: Colors.white,
+                    leading: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: padding,
+                          child: Text(
+                            "Commiter:",
+                            style: Theme.of(context).textTheme.labelLarge,
+                          ),
                         ),
-                      ),
-                      Text(
-                        commit.author.name,
-                        style: Theme.of(context).textTheme.labelMedium,
-                      ),
-                    ],
-                  ),
-                  title: Text(
-                    commit.message,
-                    style: Theme.of(context).textTheme.bodySmall,
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.center,
-                  ),
-                  trailing: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: padding,
-                        child: Text(
-                          date,
+                        Text(
+                          commit.author.name,
                           style: Theme.of(context).textTheme.labelMedium,
                         ),
-                      ),
-                      Padding(
-                        padding: padding,
-                        child: Text(
-                          hour,
+                      ],
+                    ),
+                    title: Text(
+                      commit.message,
+                      style: Theme.of(context).textTheme.bodySmall,
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center,
+                    ),
+                    trailing: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: padding,
+                          child: Text(
+                            date,
+                            style: Theme.of(context).textTheme.labelMedium,
+                          ),
                         ),
-                      )
-                    ],
+                        Padding(
+                          padding: padding,
+                          child: Text(
+                            hour,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 );
               },
@@ -105,7 +108,7 @@ class _AllCommitsState extends State<AllCommits> {
                 );
               },
             ),
-          );
+          ).animate().fadeIn(duration: const Duration(seconds: 1));
         }
         return const LoadingIndicator();
       },
