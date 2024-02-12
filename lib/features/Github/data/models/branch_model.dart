@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'commit_model.dart';
 import '../../domain/entities/branch_entity.dart';
+import 'commit_model.dart';
 
 class BranchModel extends BranchEntity {
   const BranchModel({

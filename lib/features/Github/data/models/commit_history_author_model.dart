@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import '../../domain/entities/commit_author_entity.dart';
+import '../../domain/entities/commit_history_author_entity.dart';
 
-class CommitAuthorModel extends CommitAuthorEntity {
-  const CommitAuthorModel({
+class CommitHistoryAuthorModel extends CommitHistoryAuthorEntity {
+  const CommitHistoryAuthorModel({
     String? login,
     int? id,
     String? nodeId,
@@ -43,13 +43,13 @@ class CommitAuthorModel extends CommitAuthorEntity {
           siteAdmin: siteAdmin,
         );
 
-  factory CommitAuthorModel.fromRawJson(String str) =>
-      CommitAuthorModel.fromJson(json.decode(str));
+  factory CommitHistoryAuthorModel.fromRawJson(String str) =>
+      CommitHistoryAuthorModel.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory CommitAuthorModel.fromJson(Map<String, dynamic> json) =>
-      CommitAuthorModel(
+  factory CommitHistoryAuthorModel.fromJson(Map<String, dynamic> json) =>
+      CommitHistoryAuthorModel(
         login: json["login"],
         id: json["id"],
         nodeId: json["node_id"],

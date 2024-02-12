@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/failures/failures.dart';
-import '../../../../models/branch_model.dart';
 import '../../domain/repositories/commit_repository.dart';
+import '../models/branch_model.dart';
 import '../models/commit_history_model.dart';
 
 class CommitRepositoryImpl extends CommitRepository {

@@ -1,12 +1,12 @@
 import 'package:equatable/equatable.dart';
 
-import 'commit_author_entity.dart';
+import '../../data/models/commit_author.dart';
 import 'tree_entity.dart';
 import 'verification_entity.dart';
 
 class CommitEntity extends Equatable {
-  final CommitAuthorEntity? author;
-  final CommitAuthorEntity? committer;
+  final CommitAuthorModel? author;
+  final CommitAuthorModel? committer;
   final String? message;
   final TreeEntity? tree;
   final String? url;

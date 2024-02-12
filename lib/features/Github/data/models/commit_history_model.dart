@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import '../../domain/entities/commit_history_entity.dart';
-import 'commit_author_model.dart';
+import 'commit_history_author_model.dart';
 import 'commit_model.dart';
 import 'parent_commit_model.dart';
 
@@ -13,8 +13,8 @@ class CommitHistoryModel extends CommitHistoryEntity {
     String? url,
     String? htmlUrl,
     String? commentsUrl,
-    CommitAuthorModel? author,
-    CommitAuthorModel? committer,
+    CommitHistoryAuthorModel? author,
+    CommitHistoryAuthorModel? committer,
     List<ParentCommitModel>? parent,
   }) : super(
           sha: sha,
@@ -43,10 +43,10 @@ class CommitHistoryModel extends CommitHistoryEntity {
         commentsUrl: json["comments_url"],
         author: json["author"] == null
             ? null
-            : CommitAuthorModel.fromJson(json["author"]),
+            : CommitHistoryAuthorModel.fromJson(json["author"]),
         committer: json["committer"] == null
             ? null
-            : CommitAuthorModel.fromJson(json["committer"]),
+            : CommitHistoryAuthorModel.fromJson(json["committer"]),
         parent: json["parents"] == null
             ? []
             : List<ParentCommitModel>.from(

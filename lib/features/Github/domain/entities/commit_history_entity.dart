@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
-import 'commit_author_entity.dart';
 import 'commit_entity.dart';
+import 'commit_history_author_entity.dart';
 import 'parrent_commit_entity.dart';
 
 class CommitHistoryEntity extends Equatable {
@@ -11,8 +11,8 @@ class CommitHistoryEntity extends Equatable {
   final String? url;
   final String? htmlUrl;
   final String? commentsUrl;
-  final CommitAuthorEntity? author;
-  final CommitAuthorEntity? committer;
+  final CommitHistoryAuthorEntity? author;
+  final CommitHistoryAuthorEntity? committer;
   final List<ParentCommitEntity>? parents;
 
   const CommitHistoryEntity(

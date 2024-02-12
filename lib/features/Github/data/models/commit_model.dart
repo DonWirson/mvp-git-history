@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'commit_author.dart';
+
 import '../../domain/entities/commit_entity.dart';
-import 'commit_author_model.dart';
+import 'commit_history_author_model.dart';
 import 'tree_model.dart';
 import 'verification_model.dart';
 

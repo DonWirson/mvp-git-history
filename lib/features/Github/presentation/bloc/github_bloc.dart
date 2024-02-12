@@ -2,10 +2,11 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:git_history/models/branch_model.dart';
-import 'package:git_history/models/commit_history_model.dart';
 
-import '../../../../services/github_service.dart';
+import '../../data/datasources/remote/github_service.dart';
+import '../../data/models/branch_model.dart';
+import '../../data/models/commit_history_model.dart';
+import '../../data/models/commit_model.dart';
 
 part 'github_event.dart';
 part 'github_state.dart';
@@ -27,20 +28,20 @@ class GithubBloc extends Bloc<GithubEvent, GithubState> {
       await Future.delayed(const Duration(seconds: 2));
 
       final branches = await GithubService().getBranchtList();
-      Map<String, Commit> commitList = {};
+      Map<String, CommitModel> commitList = {};
 
       for (var i = 0; i < branches.length; i++) {
         final commits =
-            await GithubService().getCommitsByBranch(branches[i].commit.sha);
+            await GithubService().getCommitsByBranch(branches[i].commit!.sha!);
         for (var commitHistory in commits) {
-          commitList.putIfAbsent(
-              commitHistory.commit.tree.sha, () => commitHistory.commit);
+          commitList.putIfAbsent(commitHistory.commit!.tree!.sha!,
+              () => commitHistory.commit! as CommitModel);
         }
       }
 
       final allCommitsSortedByDate = commitList.values.toList();
       allCommitsSortedByDate.sort(
-        (a, b) => b.committer.date.compareTo(a.committer.date),
+        (a, b) => b.committer!.date!.compareTo(a.committer!.date!),
       );
 
       emit(

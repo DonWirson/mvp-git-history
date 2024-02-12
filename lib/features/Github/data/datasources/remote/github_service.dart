@@ -1,9 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:git_history/features/Github/data/models/branch_model.dart';
-import 'package:git_history/features/Github/data/models/commit_history_model.dart';
 import 'package:http/http.dart';
+
+import '../../models/branch_model.dart';
+import '../../models/commit_history_model.dart';
 
 class GithubService {
   Future<List<BranchModel>> getBranchtList() async {

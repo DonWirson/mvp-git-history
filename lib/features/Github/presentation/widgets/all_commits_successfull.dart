@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:git_history/blocs/github_bloc/github_bloc.dart';
-import 'package:git_history/models/commit_history_model.dart';
+import '../bloc/github_bloc.dart';
+import '../../data/models/commit_model.dart';
 import 'package:intl/intl.dart';
 
 class AllCommitsSuccessfull extends StatelessWidget {
-  final List<Commit> commitList;
+  final List<CommitModel> commitList;
 
   const AllCommitsSuccessfull({
     required this.commitList,
@@ -26,9 +26,9 @@ class AllCommitsSuccessfull extends StatelessWidget {
         itemBuilder: (context, index) {
           final commit = commitList[index];
           final date =
-              DateFormat("dd-MM-yyyy").format(commit.committer.date).toString();
+              DateFormat("dd-MM-yyyy").format(commit.committer!.date!).toString();
           final hour =
-              DateFormat("HH:mm").format(commit.committer.date).toString();
+              DateFormat("HH:mm").format(commit.committer!.date!).toString();
           return Padding(
             padding: const EdgeInsets.only(top: 15.0),
             child: ListTile(
@@ -43,13 +43,13 @@ class AllCommitsSuccessfull extends StatelessWidget {
                     style: Theme.of(context).textTheme.labelLarge,
                   ),
                   Text(
-                    commit.author.name,
+                    commit.author!.name!,
                     style: Theme.of(context).textTheme.labelMedium,
                   ),
                 ],
               ),
               title: Text(
-                commit.message,
+                commit.message!,
                 style: Theme.of(context).textTheme.bodySmall,
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,

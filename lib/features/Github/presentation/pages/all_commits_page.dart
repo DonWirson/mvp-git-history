@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:git_history/core/loading_indicator.dart';
-import 'package:git_history/features/Github/presentation/widgets/all_commits_failure.dart';
-import 'package:git_history/features/Github/presentation/widgets/all_commits_successfull.dart';
-import 'package:git_history/models/commit_history_model.dart';
+import '../bloc/github_bloc.dart';
 
-import '../../../../blocs/github_bloc/github_bloc.dart';
+import '../../../../core/loading_indicator.dart';
+import '../../data/models/commit_model.dart';
+import '../widgets/all_commits_failure.dart';
+import '../widgets/all_commits_successfull.dart';
 
 class AllCommmitsPage extends StatefulWidget {
   const AllCommmitsPage({super.key});
@@ -15,7 +15,7 @@ class AllCommmitsPage extends StatefulWidget {
 }
 
 class _AllCommmitsPageState extends State<AllCommmitsPage> {
-  List<Commit> commitList = [];
+  List<CommitModel> commitList = [];
 
   @override
   void initState() {

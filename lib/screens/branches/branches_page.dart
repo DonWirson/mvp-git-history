@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../features/Github/presentation/bloc/github_bloc.dart';
+import '../../features/Github/data/models/branch_model.dart';
 
-import '../../blocs/github_bloc/github_bloc.dart';
 import '../../core/loading_indicator.dart';
-import '../../models/branch_model.dart';
 
 class BranchesPage extends StatefulWidget {
   const BranchesPage({super.key});
@@ -52,28 +52,29 @@ class _BranchesPageState extends State<BranchesPage> {
               );
             }
 
-            return  ListView.separated(
-                  itemCount: branches.length,
-                  itemBuilder: (context, index) {
-                    final branch = branches[index];
-                    return ListTile(
-                      title: Text("Branch: ${branch.name}"),
-                      trailing: InkWell(
-                        onTap: () =>
-                            navigateToCommitPage(branchSha: branch.commit.sha),
-                        child: const Icon(Icons.arrow_forward_ios_sharp),
-                      ),
-                    );
-                  },
-                  separatorBuilder: (context, index) {
-                    return const Divider();
-                  },
+            return ListView.separated(
+              itemCount: branches.length,
+              itemBuilder: (context, index) {
+                final branch = branches[index];
+                return ListTile(
+                  title: Text("Branch: ${branch.name}"),
+                  trailing: InkWell(
+                    onTap: () =>
+                        navigateToCommitPage(branchSha: branch.commit!.sha!),
+                    child: const Icon(Icons.arrow_forward_ios_sharp),
+                  ),
                 );
+              },
+              separatorBuilder: (context, index) {
+                return const Divider();
+              },
+            );
           },
         );
       },
     );
   }
+
   //TODO: fix logic in CommitsByBranch screen.
   void navigateToCommitPage({required String branchSha}) {
     ScaffoldMessenger.of(context).showSnackBar(
