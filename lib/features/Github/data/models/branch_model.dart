@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+
 import '../../domain/entities/branch_entity.dart';
 import 'commit_model.dart';
 
@@ -24,4 +25,6 @@ class BranchModel extends BranchEntity {
             : CommitModel.fromJson(json["commit"]),
         protected: json["protected"],
       );
+
+  // static fromJsonToList(List<Map<String, dynamic> json>) {}
 }

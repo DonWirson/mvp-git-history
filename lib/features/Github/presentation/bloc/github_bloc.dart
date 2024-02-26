@@ -27,13 +27,13 @@ class GithubBloc extends Bloc<GithubEvent, GithubState> {
       );
       await Future.delayed(const Duration(seconds: 2));
 
-      final branches = await GithubService().getBranchtList();
+      final apiResponse = await GithubService().getBranchtList();
       Map<String, CommitModel> commitList = {};
 
-      for (var i = 0; i < branches.length; i++) {
-        final commits =
-            await GithubService().getCommitsByBranch(branches[i].commit!.sha!);
-        for (var commitHistory in commits) {
+      for (var i = 0; i < apiResponse.data.length; i++) {
+        final commits = await GithubService()
+            .getCommitsByBranch(apiResponse.data[i].commit!.sha!);
+        for (var commitHistory in commits.data) {
           commitList.putIfAbsent(commitHistory.commit!.tree!.sha!,
               () => commitHistory.commit! as CommitModel);
         }
@@ -62,9 +62,9 @@ class GithubBloc extends Bloc<GithubEvent, GithubState> {
       );
       //Only added this delay to show the Loading indicator :D
       await Future.delayed(const Duration(seconds: 2));
-      final branches = await GithubService().getBranchtList();
+      final apiResponse = await GithubService().getBranchtList();
       emit(
-        GotAllBranchesSuccessfully(branches: branches),
+        GotAllBranchesSuccessfully(branches: apiResponse.data),
       );
     } catch (e) {
       emit(
@@ -81,10 +81,10 @@ class GithubBloc extends Bloc<GithubEvent, GithubState> {
       );
       //Only added this delay to show the Loading indicator :D
       await Future.delayed(const Duration(seconds: 2));
-      final commitHistory =
+      final apiResponse =
           await GithubService().getCommitsByBranch(event.branchSha);
       emit(
-        GotAllCommitsByBranchSuccessfully(commitHistory: commitHistory),
+        GotAllCommitsByBranchSuccessfully(commitHistory: apiResponse.data),
       );
     } catch (e) {
       emit(
