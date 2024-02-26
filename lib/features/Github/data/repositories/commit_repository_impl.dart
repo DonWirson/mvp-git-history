@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:git_history/core/data_state/api_response.dart';
 import 'package:git_history/features/Github/data/datasources/remote/github_service.dart';
 
 import '../../../../core/failures/failures.dart';
@@ -9,10 +8,16 @@ import '../models/branch_model.dart';
 import '../models/commit_history_model.dart';
 
 class CommitRepositoryImpl implements CommitRepository {
+  final GithubService _githubService;
+
+  CommitRepositoryImpl(
+    this._githubService,
+  );
+
   @override
   Future<Either<Failure, List<BranchModel>>> getBranchtList() async {
     try {
-      final apiResponse = await GithubService().getBranchtList();
+      final apiResponse = await _githubService.getBranchtList();
 
       if (apiResponse.response.statusCode == 200) {
         return Right(
@@ -40,7 +45,7 @@ class CommitRepositoryImpl implements CommitRepository {
   Future<Either<Failure, List<CommitHistoryModel>>> getCommitsByBranch(
       String branchName) async {
     try {
-      final apiResponse = await GithubService().getCommitsByBranch(
+      final apiResponse = await _githubService.getCommitsByBranch(
         branchName,
       );
       if (apiResponse.response.statusCode == 200) {

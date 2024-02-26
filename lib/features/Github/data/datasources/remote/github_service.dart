@@ -6,7 +6,9 @@ import '../../models/branch_model.dart';
 import '../../models/commit_history_model.dart';
 
 class GithubService {
-  final _dio = Dio();
+  final Dio _dio;
+
+  GithubService(this._dio);
 
   Future<ApiResponse<List<BranchModel>>> getBranchtList() async {
     final url = dotenv.env['BRANCH_ENDPOINT']!;
