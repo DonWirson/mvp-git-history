@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../features/Github/presentation/bloc/github_bloc.dart';
+import '../../features/Github/data/models/commit_model.dart';
 import 'package:intl/intl.dart';
 
-import '../../blocs/github_bloc/github_bloc.dart';
 import '../../core/loading_indicator.dart';
-import '../../models/commit_history_model.dart';
 
 class AllCommits extends StatefulWidget {
   const AllCommits({super.key});
@@ -15,7 +15,7 @@ class AllCommits extends StatefulWidget {
 }
 
 class _AllCommitsState extends State<AllCommits> {
-  List<Commit> commitList = [];
+  List<CommitModel> commitList = [];
   @override
   void initState() {
     BlocProvider.of<GithubBloc>(context).add(GotAllCommits());
@@ -40,10 +40,10 @@ class _AllCommitsState extends State<AllCommits> {
               itemBuilder: (context, index) {
                 final commit = commitList[index];
                 final date = DateFormat("dd-MM-yyyy")
-                    .format(commit.committer.date)
+                    .format(commit.committer!.date!)
                     .toString();
                 final hour = DateFormat("HH:mm")
-                    .format(commit.committer.date)
+                    .format(commit.committer!.date!)
                     .toString();
                 return Padding(
                   padding: const EdgeInsets.only(top: 15.0),
@@ -62,13 +62,13 @@ class _AllCommitsState extends State<AllCommits> {
                           ),
                         ),
                         Text(
-                          commit.author.name,
+                          commit.author!.name!,
                           style: Theme.of(context).textTheme.labelMedium,
                         ),
                       ],
                     ),
                     title: Text(
-                      commit.message,
+                      commit.message!,
                       style: Theme.of(context).textTheme.bodySmall,
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,

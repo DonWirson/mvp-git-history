@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:git_history/core/injection_container.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
-import 'blocs/github_bloc/github_bloc.dart';
 import 'core/observer/app_bloc_observer.dart';
+import 'features/Github/presentation/bloc/github_bloc.dart';
 import 'screens/landing/landing_page.dart';
 
 Future<void> main() async {
   Bloc.observer = AppBlocObserver();
   await dotenv.load(fileName: ".env");
   initializeDateFormatting();
+  await initializeDependencies();
+
   runApp(const MyApp());
 }
 
@@ -27,7 +30,10 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: BlocProvider(
-        create: (context) => GithubBloc(),
+        create: (context) => GithubBloc(
+          getIt.get(),
+          getIt.get(),
+        ),
         child: const LandingPage(),
       ),
     );
