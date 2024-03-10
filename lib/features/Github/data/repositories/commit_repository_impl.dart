@@ -1,11 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:git_history/features/Github/data/datasources/remote/github_service.dart';
+import '../datasources/remote/github_service.dart';
 
 import '../../../../core/failures/failures.dart';
 import '../../domain/repositories/commit_repository.dart';
 import '../models/branch_model.dart';
 import '../models/commit_history_model.dart';
+import '../models/commit_model.dart';
 
 class CommitRepositoryImpl implements CommitRepository {
   final GithubService _githubService;
@@ -61,6 +62,45 @@ class CommitRepositoryImpl implements CommitRepository {
           ),
         );
       }
+    } catch (e) {
+      return Left(
+        Failure(
+          message: e.toString(),
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<CommitModel>>> getAllCommits() async {
+    try {
+      Map<String, CommitModel> commitList = {};
+      List<CommitHistoryModel> commitHistoryList = [];
+      late List<BranchModel> branchList;
+
+      final apiResponse = await getBranchtList();
+      if (apiResponse.isRight()) {
+        branchList = apiResponse.getOrElse(() => []);
+      }
+
+      for (var i = 0; i < branchList.length; i++) {
+        final commits = await getCommitsByBranch(
+          branchList[i].commit!.sha!,
+        );
+        if (commits.isRight()) {
+          commitHistoryList = commits.getOrElse(() => []);
+        }
+        for (var commitHistory in commitHistoryList) {
+          commitList.putIfAbsent(commitHistory.commit!.tree!.sha!,
+              () => commitHistory.commit! as CommitModel);
+        }
+      }
+
+      final allCommitsSortedByDate = commitList.values.toList();
+      allCommitsSortedByDate.sort(
+        (a, b) => b.committer!.date!.compareTo(a.committer!.date!),
+      );
+      return Right(allCommitsSortedByDate);
     } catch (e) {
       return Left(
         Failure(

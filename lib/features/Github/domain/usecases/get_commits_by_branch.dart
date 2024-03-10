@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:git_history/core/use_case/use_case.dart';
-import 'package:git_history/features/Github/domain/repositories/commit_repository.dart';
+import '../../../../core/use_case/use_case.dart';
+import '../repositories/commit_repository.dart';
 
 import '../../../../core/failures/failures.dart';
 import '../entities/commit_history_entity.dart';

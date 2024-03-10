@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-
 import '../../domain/entities/branch_entity.dart';
 import 'commit_model.dart';
 

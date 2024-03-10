@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../features/Github/presentation/bloc/github_bloc.dart';
-import '../../features/Github/data/models/commit_model.dart';
 import 'package:intl/intl.dart';
 
 import '../../core/loading_indicator.dart';
+import '../../features/Github/data/models/commit_model.dart';
+import '../../features/Github/presentation/bloc/github_bloc.dart';
 
 class AllCommits extends StatefulWidget {
   const AllCommits({super.key});

@@ -1,20 +1,20 @@
 import 'package:dartz/dartz.dart';
 import '../../../../core/use_case/use_case.dart';
-import '../entities/branch_entity.dart';
+import '../entities/commit_entity.dart';
 import '../repositories/commit_repository.dart';
 
 import '../../../../core/failures/failures.dart';
 
-class GetBranchesUseCase
-    implements UseCase<Either<Failure, List<BranchEntity>>, void> {
+class GetAllCommitsUseCase
+    implements UseCase<Either<Failure, List<CommitEntity>>, String> {
   final CommitRepository _commitRepository;
 
-  GetBranchesUseCase(
+  GetAllCommitsUseCase(
     this._commitRepository,
   );
 
   @override
-  Future<Either<Failure, List<BranchEntity>>> call({params}) {
-    return _commitRepository.getBranchtList();
+  Future<Either<Failure, List<CommitEntity>>> call({String? params}) {
+    return _commitRepository.getAllCommits();
   }
 }

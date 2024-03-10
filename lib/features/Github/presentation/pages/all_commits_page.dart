@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../bloc/github_bloc.dart';
 
 import '../../../../core/loading_indicator.dart';
 import '../../data/models/commit_model.dart';
+import '../bloc/github_bloc.dart';
 import '../widgets/all_commits_failure.dart';
 import '../widgets/all_commits_successfull.dart';
 
