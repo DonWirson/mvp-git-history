@@ -2,13 +2,13 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import '../../domain/usecases/get_all_commits.dart';
-import '../../domain/usecases/get_branches.dart';
-import '../../domain/usecases/get_commits_by_branch.dart';
 
 import '../../data/models/branch_model.dart';
 import '../../data/models/commit_history_model.dart';
 import '../../data/models/commit_model.dart';
+import '../../domain/usecases/get_all_commits.dart';
+import '../../domain/usecases/get_branches.dart';
+import '../../domain/usecases/get_commits_by_branch.dart';
 
 part 'github_event.dart';
 part 'github_state.dart';

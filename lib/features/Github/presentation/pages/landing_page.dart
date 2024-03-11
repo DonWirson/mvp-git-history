@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../branches/branches_page.dart';
-import '../commits/all_commits.dart';
+import 'branch_list_page.dart';
+import 'all_commits_page.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
@@ -51,8 +51,14 @@ class _LandingPageState extends State<LandingPage>
       body: IndexedStack(
         index: selectedIndex,
         children: const [
-          AllCommits(),
-          BranchesPage(),
+          Card(
+            color: Colors.white,
+            margin: EdgeInsets.all(
+              20,
+            ),
+            child: AllCommitsPage(),
+          ),
+          BranchListPage(),
         ],
       ),
     );

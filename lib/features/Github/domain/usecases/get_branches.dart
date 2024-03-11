@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
+
+import '../../../../core/failures/failures.dart';
 import '../../../../core/use_case/use_case.dart';
 import '../entities/branch_entity.dart';
 import '../repositories/commit_repository.dart';
-
-import '../../../../core/failures/failures.dart';
 
 class GetBranchesUseCase
     implements UseCase<Either<Failure, List<BranchEntity>>, void> {

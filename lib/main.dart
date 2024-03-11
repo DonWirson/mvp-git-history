@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'core/injection_container.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
+import 'core/injection_container.dart';
 import 'core/observer/app_bloc_observer.dart';
 import 'features/Github/presentation/bloc/github_bloc.dart';
-import 'screens/landing/landing_page.dart';
+import 'features/Github/presentation/pages/landing_page.dart';
 
 Future<void> main() async {
   Bloc.observer = AppBlocObserver();

@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import '../datasources/remote/github_service.dart';
 
 import '../../../../core/failures/failures.dart';
 import '../../domain/repositories/commit_repository.dart';
+import '../datasources/remote/github_service.dart';
 import '../models/branch_model.dart';
 import '../models/commit_history_model.dart';
 import '../models/commit_model.dart';
@@ -111,7 +111,7 @@ class CommitRepositoryImpl implements CommitRepository {
   }
 
   String exceptionHandler(Response response) {
-    final errorMessage;
+    final String errorMessage;
     switch (response.statusCode) {
       case 400:
         errorMessage = "Bad request";

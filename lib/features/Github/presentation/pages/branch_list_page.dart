@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../core/loading_indicator.dart';
-import '../../features/Github/data/models/branch_model.dart';
-import '../../features/Github/presentation/bloc/github_bloc.dart';
+import '../../../../core/loading_indicator.dart';
+import '../../data/models/branch_model.dart';
+import '../bloc/github_bloc.dart';
 
-class BranchesPage extends StatefulWidget {
-  const BranchesPage({super.key});
+class BranchListPage extends StatefulWidget {
+  const BranchListPage({super.key});
 
   @override
-  State<BranchesPage> createState() => _BranchesPageState();
+  State<BranchListPage> createState() => _BranchListPageState();
 }
 
-class _BranchesPageState extends State<BranchesPage> {
+class _BranchListPageState extends State<BranchListPage> {
   List<BranchModel> branches = [];
   @override
   void initState() {
