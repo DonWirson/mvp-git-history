@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:git_history/features/Github/presentation/widgets/all_commits_page/all_commits_failure.dart';
-import '../widgets/all_commits_page/all_commits_successfull.dart';
-import 'package:intl/intl.dart';
+import '../../domain/entities/commit_entity.dart';
+import '../widgets/all_commits_page/all_commits_failure.dart';
+import '../widgets/commit_list.dart';
 
 import '../../../../core/loading_indicator.dart';
-import '../../data/models/commit_model.dart';
 import '../bloc/github_bloc.dart';
 
 class AllCommitsPage extends StatefulWidget {
@@ -17,7 +15,7 @@ class AllCommitsPage extends StatefulWidget {
 }
 
 class _AllCommitsPageState extends State<AllCommitsPage> {
-  List<CommitModel> commitList = [];
+  List<CommitEntity> commitList = [];
   @override
   void initState() {
     BlocProvider.of<GithubBloc>(context).add(GotAllCommits());
@@ -34,7 +32,7 @@ class _AllCommitsPageState extends State<AllCommitsPage> {
       },
       builder: (context, state) {
         if (state is GotAllCommitsSuccessfully) {
-          return AllCommitsSuccessfull(
+          return CommitList(
             commitList: commitList,
           );
         }

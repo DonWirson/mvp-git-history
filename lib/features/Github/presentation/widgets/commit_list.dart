@@ -3,13 +3,13 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
-import '../../../data/models/commit_model.dart';
-import '../../bloc/github_bloc.dart';
+import '../../domain/entities/commit_entity.dart';
+import '../bloc/github_bloc.dart';
 
-class AllCommitsSuccessfull extends StatelessWidget {
-  final List<CommitModel> commitList;
+class CommitList extends StatelessWidget {
+  final List<CommitEntity> commitList;
 
-  const AllCommitsSuccessfull({
+  const CommitList({
     required this.commitList,
     super.key,
   });
@@ -25,7 +25,7 @@ class AllCommitsSuccessfull extends StatelessWidget {
     return RefreshIndicator(
       onRefresh: onRefresh,
       child: Padding(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: ListView.separated(
           itemCount: commitList.length,
           itemBuilder: (context, index) {

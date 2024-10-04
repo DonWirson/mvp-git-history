@@ -76,7 +76,7 @@ class CommitRepositoryImpl implements CommitRepository {
     try {
       Map<String, CommitModel> commitList = {};
       List<CommitHistoryModel> commitHistoryList = [];
-      late List<BranchModel> branchList;
+      List<BranchModel> branchList = [];
 
       final apiResponse = await getBranchtList();
       if (apiResponse.isRight()) {

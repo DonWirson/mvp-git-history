@@ -12,7 +12,7 @@ class GithubInitial extends GithubState {}
 final class GotAllCommitsInProgress extends GithubState {}
 
 final class GotAllCommitsSuccessfully extends GithubState {
-  final List<CommitModel> commits;
+  final List<CommitEntity> commits;
 
   const GotAllCommitsSuccessfully({
     required this.commits,
@@ -34,7 +34,7 @@ final class GotAllCommitsFailure extends GithubState {
 final class GotAllBranchesInProgress extends GithubState {}
 
 final class GotAllBranchesSuccessfully extends GithubState {
-  final List<BranchModel> branches;
+  final List<BranchEntity> branches;
 
   const GotAllBranchesSuccessfully({
     required this.branches,
@@ -56,7 +56,7 @@ final class GotAllBranchesFailure extends GithubState {
 final class GotAllCommitsByBranchInProgress extends GithubState {}
 
 final class GotAllCommitsByBranchSuccessfully extends GithubState {
-  final List<CommitHistoryModel> commitHistory;
+  final List<CommitHistoryEntity> commitHistory;
 
   const GotAllCommitsByBranchSuccessfully({
     required this.commitHistory,

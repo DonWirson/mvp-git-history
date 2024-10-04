@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../domain/entities/branch_entity.dart';
+import '../widgets/commit_list.dart';
 
 import '../../../../core/loading_indicator.dart';
-import '../../data/models/branch_model.dart';
 import '../bloc/github_bloc.dart';
 
 class BranchListPage extends StatefulWidget {
@@ -13,7 +14,7 @@ class BranchListPage extends StatefulWidget {
 }
 
 class _BranchListPageState extends State<BranchListPage> {
-  List<BranchModel> branches = [];
+  List<BranchEntity> branches = [];
   @override
   void initState() {
     BlocProvider.of<GithubBloc>(context).add(GotAllBranches());
@@ -83,16 +84,16 @@ class _BranchListPageState extends State<BranchListPage> {
         duration: Duration(seconds: 2),
       ),
     );
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(
-    //     builder: (_) => BlocProvider.value(
-    //       value: BlocProvider.of<GithubBloc>(context),
-    //       child: CommitsByBranch(
-    //         branchSha: branchSha,
-    //       ),
-    //     ),
-    //   ),
-    // );
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => BlocProvider.value(
+          value: BlocProvider.of<GithubBloc>(context),
+          child: const CommitList(
+            commitList: [],
+          ),
+        ),
+      ),
+    );
   }
 }
