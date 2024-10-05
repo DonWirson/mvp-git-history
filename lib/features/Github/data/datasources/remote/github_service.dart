@@ -10,9 +10,22 @@ class GithubService {
 
   GithubService(this._dio);
 
+  String apiAuth = dotenv.env['GITHUB_TOKEN']!;
+
   Future<ApiResponse<List<BranchModel>>> getBranchtList() async {
     final url = dotenv.env['BRANCH_ENDPOINT']!;
-    final response = await _dio.get<List<dynamic>>(url);
+
+    Map<String, dynamic> headers = {
+      "Authorization": apiAuth,
+    };
+
+    final response = await _dio.get<List<dynamic>>(
+      url,
+      options: Options(
+        headers: headers,
+      ),
+    );
+
     final data =
         response.data!.map((branch) => BranchModel.fromJson(branch)).toList();
 
@@ -25,7 +38,18 @@ class GithubService {
   Future<ApiResponse<List<CommitHistoryModel>>> getCommitsByBranch(
       String branchName) async {
     final url = '${dotenv.env["COMMIT_ENDPOINT"]!}?sha=$branchName';
-    final response = await _dio.get<List>(url);
+
+    Map<String, dynamic> headers = {
+      "Authorization": apiAuth,
+    };
+
+    final response = await _dio.get<List>(
+      url,
+      options: Options(
+        headers: headers,
+      ),
+    );
+
     final data = response.data!
         .map((branch) => CommitHistoryModel.fromJson(branch))
         .toList();
