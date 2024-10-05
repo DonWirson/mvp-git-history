@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:git_history/features/Github/presentation/widgets/all_commits_page/all_commits_success.dart';
 import '../../domain/entities/commit_entity.dart';
 import '../widgets/all_commits_page/all_commits_failure.dart';
 import '../widgets/commit_list.dart';
@@ -32,7 +33,7 @@ class _AllCommitsPageState extends State<AllCommitsPage> {
       },
       builder: (context, state) {
         if (state is GotAllCommitsSuccessfully) {
-          return CommitList(
+          return AllCommitsSuccess(
             commitList: commitList,
           );
         }

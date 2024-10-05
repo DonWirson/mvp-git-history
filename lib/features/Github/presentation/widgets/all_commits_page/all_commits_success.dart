@@ -3,14 +3,14 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
-import '../../../../core/components/commit_tile.dart';
-import '../../domain/entities/commit_entity.dart';
-import '../bloc/github_bloc.dart';
+import '../../../../../core/components/commit_tile.dart';
+import '../../../domain/entities/commit_entity.dart';
+import '../../bloc/github_bloc.dart';
 
-class CommitList extends StatelessWidget {
+class AllCommitsSuccess extends StatelessWidget {
   final List<CommitEntity> commitList;
 
-  const CommitList({
+  const AllCommitsSuccess({
     required this.commitList,
     super.key,
   });
